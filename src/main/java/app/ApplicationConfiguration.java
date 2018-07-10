@@ -1,10 +1,12 @@
 package app;
 
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
@@ -22,8 +24,11 @@ import javax.servlet.ServletRegistration;
 @ComponentScan(basePackages = "app")
 public class ApplicationConfiguration extends  WebMvcConfigurerAdapter implements WebApplicationInitializer {
 
+    @Value("jdbcUrl")
+    private String jdbcUrl; ttt
+
     @Bean
-    public InternalResourceViewResolver internalResourceViewResolver() {
+    public InternalResourceViewResolver internalResourceViewResolver(Environment ttt env) {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setPrefix("/WEB-INF/views/");
         resolver.setSuffix(".jsp");
