@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserController {
 
 
-    @Qualifier("service1")
     @Autowired
     private UserService userService;
 
@@ -28,8 +27,20 @@ public class UserController {
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public ModelAndView login(@ModelAttribute("user") User user) {
-        userService.addUser(user);
-        System.out.println(user);
-        return null;
+        ModelAndView vm = new ModelAndView();
+        vm.addObject("user", userService.getByEmail(user));
+        vm.setViewName("welcome");
+
+        return vm;
     }
+
+    //
+    /*@RequestMapping(path = "/sigUp", method = RequestMethod.POST)
+    public ModelAndView login(@ModelAttribute("user") User user) {
+        ModelAndView vm = new ModelAndView();
+        vm.addObject("user", userService.getByEmail(user));
+        vm.setViewName("welcome");
+
+        return vm;
+    }*/
 }
