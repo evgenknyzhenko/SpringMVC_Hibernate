@@ -24,11 +24,12 @@ public class UserDaoImpl implements UserDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }*/
 
-
-
+   @Override
     public User addUser(User user) {
 
-        return null;
+         sessionFactory.getCurrentSession()
+                .save(user);
+         return user;
     }
 
     @Override

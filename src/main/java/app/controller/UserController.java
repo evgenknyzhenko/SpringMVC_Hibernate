@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -31,6 +32,22 @@ public class UserController {
         vm.addObject("user", userService.getByEmail(user));
         vm.setViewName("welcome");
 
+        return vm;
+    }
+
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    public ModelAndView signup(@ModelAttribute User user) {
+        ModelAndView vm = new ModelAndView();
+        user.setFirstName("name");
+        user.setLastName("lastName");
+        vm.addObject("user", userService.addUser(user));
+        vm.setViewName("welcome");
+        return vm;
+    }
+
+    @RequestMapping(value = "activation/{token}", method = RequestMethod.GET)
+    public ModelAndView activation(@PathVariable String token) {
+        ModelAndView vm = new ModelAndView();
         return vm;
     }
 

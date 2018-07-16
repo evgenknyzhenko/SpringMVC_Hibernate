@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -27,6 +29,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 import javax.sql.DataSource;
 import java.sql.DriverManager;
+import java.util.Properties;
 
 @EnableWebMvc
 @EnableTransactionManagement
@@ -72,6 +75,21 @@ public class ApplicationConfiguration extends  WebMvcConfigurerAdapter implement
         HibernateTransactionManager tm = new HibernateTransactionManager();
         tm.setSessionFactory(sessionFactory);
         return tm;
+    }
+    @Bean
+    public JavaMailSender mailSender() {
+        JavaMailSenderImpl ms = new JavaMailSenderImpl();
+        ms.setHost("smtp.gmail.com");
+        ms.setPort(587);
+
+        ms.setUsername("");
+        ms.setPassword("");
+        Properties props = ms.getJavaMailProperties();
+        props.put("mail.transport.protocol", "smtp");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.debug", "true");
+        return ms;
     }
 
     @Override
