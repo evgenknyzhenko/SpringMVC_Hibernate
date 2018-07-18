@@ -1,6 +1,8 @@
 package app.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "USERS")
@@ -20,6 +22,9 @@ public class User {
     @Column(name = "TOKEN")
     private String token;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<Role> roles = new ArrayList<>();
+
     public User() {
     }
 
@@ -29,6 +34,14 @@ public class User {
         this.email = email;
         this.password = password;
         this.token = token;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     public Long getId() {

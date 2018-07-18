@@ -12,8 +12,10 @@ public class Product {
     private Long id;
     @Column(name = "NAME")
     private String name;
+
     @Column(name = "PRICE")
     private Double price;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FK_CATEGORY_ID")
     private Category category;

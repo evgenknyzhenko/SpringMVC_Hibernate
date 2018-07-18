@@ -77,18 +77,18 @@ public class ApplicationConfiguration extends  WebMvcConfigurerAdapter implement
         return tm;
     }
     @Bean
-    public JavaMailSender mailSender() {
+    public JavaMailSender mailSender(Environment env) {
         JavaMailSenderImpl ms = new JavaMailSenderImpl();
         ms.setHost("smtp.gmail.com");
         ms.setPort(587);
 
-        ms.setUsername("");
-        ms.setPassword("");
+        ms.setUsername(env.getProperty("mail.host"));
+        ms.setPassword(env.getProperty("mail.password"));
         Properties props = ms.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
         props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.debug", "true");
+        props.put("mail.smtp.starttls.enable", env.getProperty("mail.tls"));
+        props.put("mail.debug", env.getProperty("mail.debug"));
         return ms;
     }
 

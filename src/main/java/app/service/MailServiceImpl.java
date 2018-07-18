@@ -4,9 +4,11 @@ import app.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Component;
 
 import java.util.concurrent.CompletableFuture;
 
+@Component
 public class MailServiceImpl implements MailService {
     @Autowired
     private JavaMailSender javaMailSender;
@@ -23,7 +25,7 @@ public class MailServiceImpl implements MailService {
         msg.setSubject("Email verification");
         msg.setText
                 (String.format("Please follow link below for finishig your " +
-                        "registration:http://localhost:8081/activation/%s", user.getToken()));
+                        "registration: http://localhost:8081/activation/%s", user.getToken()));
 
         return msg;
     }

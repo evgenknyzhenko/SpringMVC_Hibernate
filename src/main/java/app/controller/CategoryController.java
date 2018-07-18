@@ -22,7 +22,7 @@ public class CategoryController {
         return vm;
     }
 
-    @RequestMapping(value = "/category")
+    @RequestMapping(value = "/category", method = RequestMethod.GET)
     public ModelAndView getById(@RequestParam(name="c_id") Long id) {
         ModelAndView vm = new ModelAndView();
         vm.setViewName("category");

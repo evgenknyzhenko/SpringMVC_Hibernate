@@ -35,12 +35,12 @@ public class Category {
         this.name = name;
     }
 
-    public String getDescroption() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescroption(String descroption) {
-        this.description = descroption;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public List<Product> getProductList() {
