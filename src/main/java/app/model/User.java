@@ -22,7 +22,7 @@ public class User {
     @Column(name = "TOKEN")
     private String token;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "Users")
     private List<Role> roles = new ArrayList<>();
 
     public User() {

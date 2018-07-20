@@ -10,7 +10,7 @@
 
     <link href="<c:url value="/resources/static/css/bootstrap.min.css"/>" rel="stylesheet">
 
-    <link href="<c:url value="/resources/static/css/sigin.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/static/css/signin.css"/>" rel="stylesheet">
 
 </head>
 <body>
