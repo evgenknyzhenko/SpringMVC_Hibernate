@@ -35,12 +35,19 @@ public class UserController {
         return vm;
     }
 
-    @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public ModelAndView signup(@ModelAttribute User user) {
+    @RequestMapping(path = "/signup", method = RequestMethod.GET)
+    public ModelAndView signupGet() {
         ModelAndView vm = new ModelAndView();
-        user.setFirstName("name");
-        user.setLastName("lastName");
+        vm.addObject("user", new User());
+        vm.setViewName("signup");
+        return vm;
+    }
+
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    public ModelAndView signupPost(@ModelAttribute User user) {
+        ModelAndView vm = new ModelAndView();
         vm.addObject("user", userService.addUser(user));
+        System.out.println(user.getFirstName());
         vm.setViewName("welcome");
         return vm;
     }
@@ -50,14 +57,4 @@ public class UserController {
         ModelAndView vm = new ModelAndView();
         return vm;
     }
-
-    //
-    /*@RequestMapping(path = "/sigUp", method = RequestMethod.POST)
-    public ModelAndView login(@ModelAttribute("user") User user) {
-        ModelAndView vm = new ModelAndView();
-        vm.addObject("user", userService.getByEmail(user));
-        vm.setViewName("welcome");
-
-        return vm;
-    }*/
 }

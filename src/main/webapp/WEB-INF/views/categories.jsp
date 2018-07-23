@@ -13,6 +13,8 @@
 </head>
 <body>
 
+<%@include file="header.jsp" %>
+
 <c:forEach var="c" items="${categories}">
     <h1>
         <a href="<c:out value="/category?c_id=${c.id}"/>">

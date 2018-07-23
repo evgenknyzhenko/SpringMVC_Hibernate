@@ -15,14 +15,15 @@ public class User {
     private String firstName;
     @Column(name = "LAST_NAME")
     private String lastName;
-    @Column(name = "EMAIL")
+    @Column(name = "EMAIL_NAME")
     private String email;
     @Column(name = "PASSWORD")
     private String password;
     @Column(name = "TOKEN")
     private String token;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "Users")
+
+   @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
     private List<Role> roles = new ArrayList<>();
 
     public User() {
@@ -35,6 +36,7 @@ public class User {
         this.password = password;
         this.token = token;
     }
+
 
     public List<Role> getRoles() {
         return roles;

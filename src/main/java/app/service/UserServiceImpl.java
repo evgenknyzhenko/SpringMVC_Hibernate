@@ -18,9 +18,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User addUser(User user) {
         user.setToken(getToken());
-        mailService.notify(user);
+        //mailService.notify(user);
 
-        return user;
+
+        return userDao.addUser(user);
     }
 
     @Override
