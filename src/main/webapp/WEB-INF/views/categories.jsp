@@ -17,8 +17,7 @@
 
 <c:forEach var="c" items="${categories}">
     <h1>
-        <a href="<c:out value="/category?c_id=${c.id}"/>">
-            <c:out value="${c.name}"/></a>
+        <a href="<c:out value="/category?c_id=${c.id}"/>"><c:out value="${c.name}"/></a>
     </h1>
 </c:forEach>
 </body>
