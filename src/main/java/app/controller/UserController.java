@@ -1,14 +1,12 @@
 package app.controller;
 
+import app.ajax.AjaxResponceBody;
+import app.ajax.EmailPayLoad;
 import app.model.User;
 import app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -56,5 +54,22 @@ public class UserController {
     public ModelAndView activation(@PathVariable String token) {
         ModelAndView vm = new ModelAndView();
         return vm;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/email", method = RequestMethod.GET)
+    public AjaxResponceBody emailCheck(@RequestBody EmailPayLoad email){
+        AjaxResponceBody resp = new AjaxResponceBody();
+        User user = new User();
+        user.setEmail(email.getEmail());
+
+        if(userService.getByEmail(user) !=null){
+            resp.setMsg("NOK");
+            resp.setResult("false");
+        } else {
+            resp.setMsg("OK");
+            resp.setResult("true");
+        }
+        return resp;
     }
 }

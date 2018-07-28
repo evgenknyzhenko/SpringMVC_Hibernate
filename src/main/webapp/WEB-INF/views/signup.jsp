@@ -18,6 +18,8 @@
 
         <title>Sign Up</title>
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
         <link href="<c:url value="/resources/static/css/bootstrap.css"/>" rel="stylesheet">
 
         <link href="<c:url value="/resources/static/css/signin.css"/>" rel="stylesheet">
@@ -28,15 +30,56 @@
 
     <spring:form class="form-signin" action="/signup" modelAttribute="user">
         <h3 class="form-signin-heading">Input your first name</h3>
+
         <spring:input path="firstName" type="firstName" class="form-control" placeholder="First Name"/>
+        <c:if test="${resp}">${resp.val}</c:if>
         <h3 class="form-signin-heading">Input your last name</h3>
+
         <spring:input path="lastName" type="lastName" class="form-control" placeholder="Last Name"/>
         <h3 class="form-signin-heading">Input email</h3>
+
         <spring:input path="email" type="email" class="form-control" placeholder="Email address"/>
         <h3 class="form-signin-heading">Enter password</h3>
+        <%--span--%>
+        <span style="" id="msg"></span> <spring:input id="email" name="email" path="email" type="email" class="form-control" placeholder="Email address"/>
+
+
         <spring:input path="password" type="password" class="form-control" placeholder="Password"/>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
     </spring:form>
+
+    <script>
+        $("input").blur(function(){
+            alert("This input field has lost its focus.");
+        });
+
+    </script>
+
+<%--<&lt;%&ndash;%--ajax&ndash;%&gt;
+    <script>
+        $("#email").blur(function(){
+            var email = $("#email").val();
+
+            json = {};
+            json ["email"] = email;
+
+            $.ajax({
+                type : "POST",
+                contentType : "application/json",
+                url : "http://localhost:8080/email",
+                data : JSON.stringify(json),
+                dataType : 'json',
+                timeout : 100000,
+                success : function(data) {
+                    $("#msg").html(data.msg);
+                },
+                error : function(e) {
+                    $("#msg").html(data.msg);
+                }
+            });
+        });
+
+    </script>&ndash;%&gt;--%>
 </div>
 </body>
 </html>
